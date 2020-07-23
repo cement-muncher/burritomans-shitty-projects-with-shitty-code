@@ -1,0 +1,21 @@
+//Version 1.0
+The version 1.0 of this bot has been develoved in a time of approximately 4 days starting the 20/07/2020 during the which I fisrt
+learnt how to kind of deal with asynchronous operations in JS. 
+
+It was develoved with node.js v10.19.0 and discord.js 12.2.0
+
+  //Explanation of the code
+  (See the the EXPLANATION.rd)
+  
+  //Known errors/bugs
+  It's massive and unconsistently and poorly formatted
+  
+  //Future plans
+  -->Short term
+    Separate it into modules
+  -->Long term
+    Have multiple games happen at once
+    Make it so that you can play with yourself, having the bot control the other player
+    Being able to play in grid bigger 3x3 (Cannot confirm if the previous objective will be able to work in tandem w/ this one)
+    
+  
