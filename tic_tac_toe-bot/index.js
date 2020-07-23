@@ -1,4 +1,6 @@
-//Import the discord.js
+//Made by BurritoMan (https://github.com/burritoman70/burritomans-shitty-projects-with-shitty-code) 
+//Version 1.0 on 24/07/2020 0:50 A.M. and commited 24/07/2020 at 01:35 A.M.
+//Import the discord.js library
 const discord=require("discord.js");
 //Create a new client
 const client=new discord.Client();
