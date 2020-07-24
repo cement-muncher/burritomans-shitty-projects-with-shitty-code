@@ -75,18 +75,18 @@ client.login();
 //New message event
 client.on("message", message => {
 	//Regex to check whether the message sent is to be interpreted by the bot as a command
-	const regChallenge = new RegExp("^!reto \<\@\![0-9]+\>$");
-	const regAcceptChallenge = new RegExp("^!acepto$");
-	const regRejectChallenge = new RegExp("^!deniego$");
+	const regChallenge = new RegExp("^!challenge \<\@\![0-9]+\>$");
+	const regAcceptChallenge = new RegExp("^!acept$");
+	const regRejectChallenge = new RegExp("^!reject$");
 	const regIdChallenged = new RegExp("[0-9]+");
-	const regMove = new RegExp("^!marco [1-9]$");
-	const regRenember = new RegExp("^!recordar$");
-	const regSurrender = new RegExp("^!rendirse$");
+	const regMove = new RegExp("^!mark [1-9]$");
+	const regRenember = new RegExp("^!reminder$");
+	const regSurrender = new RegExp("^!surrender$");
 	//Only accept from non-bots and from guild text channels
 	if ( (!message.author.bot) && message.channel.type =="text") {
 		//Used to check the state on which the games at
 		switch (state) {
-			//State 0, A.K.A. the challenge,  challenge a user w/ !reto <tag user>
+			//State 0, A.K.A. the challenge,  challenge a user w/ "!challenge <tag user>"
 			case 0:
 				if ( regChallenge.test(message.content) ) { 
 					challenged.id=regIdChallenged.exec(message.content)[0];
@@ -117,8 +117,8 @@ client.on("message", message => {
 							challenged.name = query.user.username;
 						}) 
 						.then( ()=> { challenged.order?
-							message.channel.send("<@!"+challenger.id+">"+" va primero (X)"+board.formatted()):
-							message.channel.send("<@!"+challenged.id+">"+" va primero (X)"+board.formatted());
+							message.channel.send("<@!"+challenger.id+">"+" goes first (X)"+board.formatted()):
+							message.channel.send("<@!"+challenged.id+">"+" goes first (X)"+board.formatted());
 						});
 					});
 					state++;
@@ -127,7 +127,7 @@ client.on("message", message => {
 					state=0;
 					message.guild.members.fetch(challenged.id)
 					.then( query => {
-						message.channel.send("<@!"+challenger.id+">\n"+query.user.username+" ha denegado tu reto");
+						message.channel.send("<@!"+challenger.id+">\n"+query.user.username+" has rejected your challenge");
 					});
 				};
 			break;
@@ -143,7 +143,7 @@ client.on("message", message => {
 							loser=challenger; 
 							winner=challenged;
 						};
-						message.channel.send(loser.name+" se ha rendido, "+winner.name+" resulta ganador"+board.formatted());
+						message.channel.send(loser.name+" has surrendered, "+winner.name+" wins"+board.formatted());
 						challenged.reset();
 						challenger.reset();
 						board.reset();
@@ -155,7 +155,7 @@ client.on("message", message => {
 					//The next statement is to check if one of the participants needs a refresher on the current of the game
 					if (regRenember.test(message.content) == true) {
 						turno.order?simbol=" (O)":simbol=" (X)";
-						message.channel.send("Es el turno de "+turno.name+simbolo+board.formatted());
+						message.channel.send("It's "+turno.name+simbolo+"'s turn"+board.formatted());
 					};
 					//From now onwards everything here is to mark a box and check the result of the game
 					markedBox = parseInt(message.content.charAt(7))-1	
@@ -168,7 +168,7 @@ client.on("message", message => {
 							victory=board.check(turn.order);
 						}
 						if (victory == 1) {
-							message.channel.send("El duelo entre "+challenger.name+" y "+challenged.name+" ha terminado con "+turno.name+" como vencedor"+board.formatted());
+							message.channel.send("The duel betweeen "+challenger.name+" and "+challenged.name+" has ended with "+turno.name+" as the winner"+board.formatted());
 							state=0;
 							board.reset();
 							challenged.reset();
@@ -176,7 +176,7 @@ client.on("message", message => {
 							break;
 						};
 						if (victory != 1 && state==11) {
-							message.channel.send("El duelo entre "+challenger.name+" y "+challenged.name+" ha terminado en empate\n"+board.formatted());
+							message.channel.send("The duel between "+challenger.name+" and "+challenged.name+" has ended in a stalemate"+board.formatted());
 							state=0;
 							board.reset();
 							challenged.reset();
@@ -184,8 +184,8 @@ client.on("message", message => {
 							break;
 						};
 						state%2 == challenger.order?
-							message.channel.send("<@!"+challenged.id+">"+" es tu turno"+board.formatted()):
-							message.channel.send("<@!"+challenger.id+">"+" es tu turno"+board.formatted()); 
+							message.channel.send("<@!"+challenged.id+">"+" its your turn"+board.formatted()):
+							message.channel.send("<@!"+challenger.id+">"+" its your turn"+board.formatted()); 
 						state++;
 					};
 				}
