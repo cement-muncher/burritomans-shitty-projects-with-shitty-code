@@ -3,6 +3,7 @@ The version 1.0 of this bot has been develoved in a time of approximately 4 days
 learnt how to kind of deal with asynchronous operations in JS. 
 
 It was develoved with node.js v10.19.0 and discord.js 12.2.0
+(All the things printed and read by the bot are in spanish sorry for the inconvinience)
 
   //How to use it
   Challenge another player within the same guild with "!reto <tag the challenged user>"
