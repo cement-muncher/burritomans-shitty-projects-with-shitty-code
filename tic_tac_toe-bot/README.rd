@@ -4,6 +4,13 @@ learnt how to kind of deal with asynchronous operations in JS.
 
 It was develoved with node.js v10.19.0 and discord.js 12.2.0
 
+  //How to use it
+  Challenge another player within the same guild with "!reto <tag the challenged user>"
+  (Obviously the bot needs to be able to read messages on the selected channel)
+  The challenged player then replies with either "!acepto" if it accepts the challenge or "!deniego" if it doesnt
+  The bot then selects who goes first, use "!marco <box number>" to check a box, "!rendirse" to surrender
+  and "!recordar" to get a refresher on the current state of the game
+
   //Explanation of the code
   (See the the EXPLANATION.rd)
   
