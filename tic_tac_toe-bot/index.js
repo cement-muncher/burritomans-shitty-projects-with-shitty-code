@@ -138,12 +138,12 @@ client.on("message", message => {
 					if (regSurrender.test(message.content)) {
 						if (message.author.id==challenger.id)	{
 							loser=challenger;
-							winnerr=challenged;
+							winner=challenged;
 						} else { 
 							loser=challenger; 
-							winnerr=challenged;
+							winner=challenged;
 						};
-						message.channel.send(perdedor.name+" se ha rendido, "+ganador.name+" resulta ganador"+board.formatted());
+						message.channel.send(loser.name+" se ha rendido, "+winner.name+" resulta ganador"+board.formatted());
 						challenged.reset();
 						challenger.reset();
 						board.reset();
