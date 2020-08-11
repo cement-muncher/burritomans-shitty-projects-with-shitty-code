@@ -13,15 +13,15 @@ There are 3 objects; challenger, challenged and board
     reset(): This method resets the properties to their default state
   Board: Its used to store the current state of the board alongside the methods used to do anything related with it. It's properties and methods are:
     boxes: Stores the current state of the board as an array
-    formatted: Returns a ready to print formatted board
-    reset: resets the board to its original state
-    mark: marks the selected box. Also checks wether the box has already been written on
-    check: checks if one of the players has won via a 27 lines long switch
+    formatted(): Returns a ready to print formatted board
+    reset(): resets the board to its original state
+    mark(): marks the selected box. Also checks wether the box has already been written on
+    check(): checks if one of the players has won via a 27 lines long switch
   
 The flow of the game is the following:
   First of all whenever a message is send checks if the message has been sent via a guild text channel and the user was not a bot
   Then using a switch sentence it evaluates the current value of the **state** variable to see in which phase of the game were at
-  The state variable can hold 11 different values, ranging from to 0 to 11:
+  The state variable can hold 12 different values, ranging from to 0 to 11:
     0:The bot is waiting for someone to challenge another user
     1:The bot is waiting for the challenged user to either decline or accept the challenge
     2-11: The actual game
