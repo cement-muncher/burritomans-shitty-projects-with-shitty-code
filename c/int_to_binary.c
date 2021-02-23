@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
+    Convert an integer into its corresponding big endian representation
+*/
 int main (void) {
 	int a;
 	scanf("%d",&a);
