@@ -57,7 +57,7 @@ void init_table(table_t *table) {
 	table->field_num=0;
 	table->entry_num=0;
 	for (int i=0;i<SIZE;i++) {
-		table->field_name[i]='\0';
+		table->field_name[i][0]='\0';
 		table->data[i]=NULL;
 	}
 	
@@ -89,7 +89,7 @@ int field_adder(table_t *table,int number) {
 				return_value=1;
 				break;
 			case(6):
-				table->field[number]='\0';
+				table->fields[number]='\0';
 				return_value=0;
 				break;
 			default:
@@ -112,10 +112,3 @@ int rename_field(table_t *table) {
 	}
 	return 0;
 }
-//Borra una tabla
-void delete_table(table_t *table) {
-	for (int i=0;i<SIZE;i++) free(data[i]);
-	free(metadata_db.tables[position]);
-	metadata_db.free_slots^(0x1<<table->position);
-}	
-
