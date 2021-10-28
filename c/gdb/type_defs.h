@@ -2,7 +2,7 @@
 
 #define TYPES
 //Define los tipos
-#define CHAR 1
+#define STRING 1
 #define CHAR_P 2
 #define LONG 3
 #define LONG_P 4
@@ -17,18 +17,19 @@
 #define DOUBLE_P_S sizeof(double *)
 //Define el tamaño de los arrays basado en el tipo de free_slots;
 #define SIZE 64
-
+#define STRING_SIZE 25
 typedef struct table {
-	char *name;
+	char name[STRING_SIZE]
 	int arg_num;
-	char *args;
+	char *args[SIZE];
 	void *data[SIZE];
-	char *name_field[SIZE];
+	char name_field[SIZE][STRING_SIZE];
 } table;
 typedef struct relation {
-	char *name;
+	char name[STRING_SIZE];
 	void *references[SIZE];
-	void *referenced[SIZE];
+	void *references[SIZE];
+	struct table *tables[2];
 }
 struct {
 	long free_slots;
