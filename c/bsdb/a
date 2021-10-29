@@ -1,0 +1,131 @@
+ddl.c: In function ‘init_table’:
+ddl.c:76:25: error: stray ‘\304’ in program
+   76 |  char string[STRING_SIZEī]
+      |                         ^
+ddl.c:76:26: error: stray ‘\253’ in program
+   76 |  char string[STRING_SIZEī]
+      |                          ^
+ddl.c:77:2: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘get_string’
+   77 |  get_string("The new table's name (QUIT to exit)",string,STRING_SIZE);
+      |  ^~~~~~~~~~
+ddl.c:77:51: error: ‘string’ undeclared (first use in this function); did you mean ‘stdin’?
+   77 |  get_string("The new table's name (QUIT to exit)",string,STRING_SIZE);
+      |                                                   ^~~~~~
+      |                                                   stdin
+ddl.c:77:51: note: each undeclared identifier is reported only once for each function it appears in
+ddl.c:81:3: warning: implicit declaration of function ‘scaf’; did you mean ‘scanf’? [-Wimplicit-function-declaration]
+   81 |   scaf("%c%*c",&quit);
+      |   ^~~~
+      |   scanf
+ddl.c:82:26: error: expected ‘;’ before ‘}’ token
+   82 |   if (quit=='c') return 0
+      |                          ^
+      |                          ;
+   83 |  }
+      |  ~                        
+ddl.c: In function ‘create_relation’:
+ddl.c:151:3: warning: implicit declaration of function ‘dprinf’; did you mean ‘dprintf’? [-Wimplicit-function-declaration]
+  151 |   dprinf(2,"No more space for another relation\n");
+      |   ^~~~~~
+      |   dprintf
+ddl.c:154:14: error: ‘struct metadata_t’ has no member named ‘relation’; did you mean ‘num_relations’?
+  154 |  db_metadata.relation[result]=malloc(sizeof(relation_t));
+      |              ^~~~~~~~
+      |              num_relations
+ddl.c:155:34: error: ‘struct metadata_t’ has no member named ‘relation’; did you mean ‘num_relations’?
+  155 |  relation_t relation=db_metadata.relation[result];
+      |                                  ^~~~~~~~
+      |                                  num_relations
+ddl.c:156:9: warning: implicit declaration of function ‘init_relationi’; did you mean ‘init_relation’? [-Wimplicit-function-declaration]
+  156 |  result=init_relationi();
+      |         ^~~~~~~~~~~~~~
+      |         init_relation
+ddl.c:158:8: error: incompatible type for argument 1 of ‘free’
+  158 |   free(relation);
+      |        ^~~~~~~~
+      |        |
+      |        relation_t {aka struct relation}
+In file included from ddl.c:5:
+/usr/include/stdlib.h:565:25: note: expected ‘void *’ but argument is of type ‘relation_t’ {aka ‘struct relation’}
+  565 | extern void free (void *__ptr) __THROW;
+      |                   ~~~~~~^~~~~
+ddl.c:163:7: error: ‘orign’ undeclared (first use in this function); did you mean ‘origin’?
+  163 |  link(orign,destination);
+      |       ^~~~~
+      |       origin
+ddl.c:163:13: warning: passing argument 2 of ‘link’ from incompatible pointer type [-Wincompatible-pointer-types]
+  163 |  link(orign,destination);
+      |             ^~~~~~~~~~~
+      |             |
+      |             table_t * {aka struct table *}
+In file included from ddl.c:2:
+/usr/include/unistd.h:789:50: note: expected ‘const char *’ but argument is of type ‘table_t *’ {aka ‘struct table *’}
+  789 | extern int link (const char *__from, const char *__to)
+      |                                      ~~~~~~~~~~~~^~~~
+ddl.c: In function ‘init_relation’:
+ddl.c:169:2: warning: implicit declaration of function ‘vif’ [-Wimplicit-function-declaration]
+  169 |  vif (strcmp(string,"QUIT")) {
+      |  ^~~
+ddl.c:169:29: error: expected ‘;’ before ‘{’ token
+  169 |  vif (strcmp(string,"QUIT")) {
+      |                             ^~
+      |                             ;
+ddl.c: At top level:
+ddl.c:177:5: error: conflicting types for ‘link’
+  177 | int link (table_t origin, table_t destination) {
+      |     ^~~~
+In file included from ddl.c:2:
+/usr/include/unistd.h:789:12: note: previous declaration of ‘link’ was here
+  789 | extern int link (const char *__from, const char *__to)
+      |            ^~~~
+ddl.c: In function ‘link’:
+ddl.c:182:16: error: invalid type argument of ‘->’ (have ‘table_t’ {aka ‘struct table’})
+  182 |  for (;i<origin->field_num;i++) {
+      |                ^~
+ddl.c:183:27: error: invalid type argument of ‘->’ (have ‘table_t’ {aka ‘struct table’})
+  183 |   if (strcmp(string,origin->field_name[i])) {
+      |                           ^~
+ddl.c:184:18: error: invalid type argument of ‘->’ (have ‘table_t’ {aka ‘struct table’})
+  184 |    switch (origin->fields[i]) {
+      |                  ^~
+ddl.c:185:18: error: ‘fields’ undeclared (first use in this function)
+  185 |     case(STRING):fields[i]=STRING_P;
+      |                  ^~~~~~
+ddl.c:186:6: error: ‘field_size’ undeclared (first use in this function)
+  186 |      field_size[i]=STRING_P_S;
+      |      ^~~~~~~~~~
+ddl.c:189:6: error: expected ‘;’ before ‘field_size’
+  189 |      field_size[i]=LONG_P_S;
+      |      ^~~~~~~~~~
+ddl.c:192:6: error: expected ‘;’ before ‘field_size’
+  192 |      field_size[i]=DOUPLE_P_S;
+      |      ^~~~~~~~~~
+ddl.c:200:16: error: invalid type argument of ‘->’ (have ‘table_t’ {aka ‘struct table’})
+  200 |  for (;j<origin->field_num;j++) {
+      |                ^~
+ddl.c:201:32: error: invalid type argument of ‘->’ (have ‘table_t’ {aka ‘struct table’})
+  201 |   if (strcmp(string,destination->field_name[i])) {
+      |                                ^~
+ddl.c:202:23: error: invalid type argument of ‘->’ (have ‘table_t’ {aka ‘struct table’})
+  202 |    switch (destination->fields[j]) {
+      |                       ^~
+ddl.c:205:6: error: expected ‘;’ before ‘break’
+  205 |      break;
+      |      ^~~~~
+ddl.c:220:16: error: expected ‘)’ before ‘i’
+  220 |   scanf("%d%*c"i,&relation);
+      |                ^
+      |                )
+ddl.c:220:11: warning: format ‘%d’ expects a matching ‘int *’ argument [-Wformat=]
+  220 |   scanf("%d%*c"i,&relation);
+      |          ~^
+      |           |
+      |           int *
+utils.c: In function ‘get_string’:
+utils.c:20:25: error: too many arguments to function ‘strcpy’
+   20 |                         strcpy(input,string,size);
+      |                         ^~~~~~
+In file included from utils.c:2:
+/usr/include/string.h:122:14: note: declared here
+  122 | extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+      |              ^~~~~~
