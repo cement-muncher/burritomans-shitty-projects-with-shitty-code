@@ -36,7 +36,7 @@ int create_table(void) {
 		if (!j && i==0) {
 			char response;
 		       	printf("Do you wish to quit the table creation wizard?(y/n)");
-			scanf("%c%*c",&response);
+			response= (char) getchar();
 			if (response=='y') {
 				return 0;
 				free(db_metadata.tables[result]);
@@ -75,10 +75,10 @@ long get_free(int value) {
 int init_table(table_t *table) {
 	char string[STRING_SIZE];
 	get_string("The new table's name (QUIT to exit)",string,STRING_SIZE);
-	if (strcmp("QUIT",string)) {
+	if (strcmp("QUIT",string)==0) {
 		printf("Are you sure you wan to quit (y/n):");
 		char quit;
-		scanf("%c%*c",&quit);
+		quit= (char) getchar();
 		if (quit=='c')	return 0;
 	}
 	table->field_num=0;
@@ -96,7 +96,7 @@ int field_adder(table_t *table,int number) {
 	printf("Select the data type: STRING (0), LONG (2) , DOUBLE (4) \nIf you wish to quit type: QUIT (6)\n");
 	int character;
         while (1) {
-		scanf("%d%*c",&character);
+		character=getchar();
 		switch (character) {
 			case (0):
 				table->fields[number]=STRING;
@@ -161,7 +161,10 @@ int create_relation(table_t *origin, table_t *destination) {
 	}
 	relation->tables[0]=origin;
 	relation->tables[1]=destination;
-	link_tables(origin,destination);
+	int i=1;
+	do {
+		link_tables(origin,destination);
+	} while(!i);
 
 }
 int init_relation(relation_t *relation) {
@@ -170,7 +173,7 @@ int init_relation(relation_t *relation) {
 	if (strcmp(string,"QUIT")) {
 		printf("Are you sure you want to quit the relationship creation wizard?(y/n)");
 		char quit;
-		scanf("%c%*c",&quit);
+		quit= (char) getchar();
 		if (quit=='q') return 0;
 	}
 	return 1;
@@ -178,19 +181,22 @@ int init_relation(relation_t *relation) {
 int link_tables (table_t *origin, table_t *destination) {
 	char string[STRING_SIZE];
 	int origin_data_size=0, destination_data_size=0;
-	int i=0,j=0;
+	int i=0,j=0, type;
 	get_string("Choose the field to be linked", string, STRING_SIZE);
 	for (;i<origin->field_num;i++) {
-		if (strcmp(string,origin->field_name[i])) {
+		if (strcmp(string,origin->field_name[i])==0) {
 			switch (origin->fields[i]) {
 				case(STRING):origin->fields[i]=STRING_P;
 					origin->field_size[i]=STRING_P_S;
+					type=STRING;
 					break;
 				case(LONG):origin->fields[i]=LONG_P;
 					origin->field_size[i]=LONG_P_S;
+					type=LONG;
 					break;
 				case(DOUBLE):origin->fields[i]=DOUBLE_P;
 					origin->field_size[i]=DOUBLE_P_S;
+					type=DOUBLE;
 					break;
 			}
 			break;
@@ -199,26 +205,30 @@ int link_tables (table_t *origin, table_t *destination) {
 	}
 	get_string("Choose the field to be linked to", string, STRING_SIZE);
 	for (;j<origin->field_num;j++) {
-		if (strcmp(string,destination->field_name[i])) {
+		if (strcmp(string,destination->field_name[i])==0) {
 			switch (destination->fields[j]) {
 				case(STRING):destination->fields[j]=STRING_P;
 					destination->field_size[j]=STRING_P_S;
+					if (type!=STRING) return 0;
 					break;
 				case(LONG):destination->fields[j]=LONG_P;
 					destination->field_size[j]=LONG_P_S;
+					if (type!=STRING) return 0;
 					break;
 				case(DOUBLE):destination->fields[j]=DOUBLE_P;
 					destination->field_size[j]=DOUBLE_P_S;
+					if (type!=DOUBLE) return 0;
 					break;
 			}
 		break;
 		}
 	destination_data_size+=destination->field_size[j];
 	}
+	int breakable=0;
 	while (1) {
-		int relation,breakable=0;
+		int relation;
 		printf("Choose which type of relation it is: 1-1 (0) 1-N (2) N-M (3)");
-		scanf("%d%*c",&relation);
+		relation=getchar();
 		switch (relation) {
 			case(ONE_ONE):printf("a\n");
 				      breakable=1;
@@ -231,7 +241,7 @@ int link_tables (table_t *origin, table_t *destination) {
 				  break;
 		}
 	}
-				
+	if (breakable) return 1;				
 }
 
 

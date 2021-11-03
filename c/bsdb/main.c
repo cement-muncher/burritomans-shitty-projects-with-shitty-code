@@ -7,7 +7,6 @@
 #include <string.h>
 #include <assert.h>
 #include "type_defs.h"
-//Define db_metadata
 struct metadata_t db_metadata={
 	.free_slots_tables=0,
 	.free_slots_relations=0,
@@ -15,8 +14,5 @@ struct metadata_t db_metadata={
 	.num_tables=0,
 };
 //Importa las funciones aplicables 
-extern int create_table(void);
 int main (void) {
-	
-
 }
