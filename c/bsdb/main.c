@@ -14,5 +14,7 @@ struct metadata_t db_metadata={
 	.num_tables=0,
 };
 //Importa las funciones aplicables 
+extern int create_table();
 int main (void) {
+	create_table();
 }

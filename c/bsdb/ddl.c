@@ -10,7 +10,10 @@
 #define RELATIONS 0
 //Prototipos de las estructuras
 extern struct metadata_t metadata;
-extern void get_string(const char *string,char *input,size_t size);
+//Definiciones de utils.c
+extern int get_string(const char *string,char *input,size_t size);
+extern char get_char(void);
+//Prototipos de creaccion de tablas
 int create_table(void);
 int init_table(table_t *table);
 long get_free(int value);
@@ -21,29 +24,21 @@ int create_table(void) {
 	long result;
 	result=get_free(TABLES);
 	if (result==-1) {
-		dprintf(2,"There is no more room for a table");
+		dprintf(2,"There is no more room for a table\n");
 		return -1;
 	}
 	db_metadata.tables[result]=malloc(sizeof(table_t));
 	table_t *table=db_metadata.tables[result];
-	if (init_table(table)) {
+	if (!init_table(table)) {
 		free(table);
 		return 0;
 	}	
-	int i=0,j=0;
-	do {
-		j=field_adder(table,i);
-		if (!j && i==0) {
-			char response;
-		       	printf("Do you wish to quit the table creation wizard?(y/n)");
-			response= (char) getchar();
-			if (response=='y') {
-				return 0;
-				free(db_metadata.tables[result]);
-			}
-		}
-		i++;
-	} while(j);
+	int i=0;
+	i=field_adder(table,0);
+	if (i==0) {
+		free(table);
+		return 0;
+	}
 	table->field_num=i;
 	db_metadata.num_tables+=1;
 	db_metadata.free_slots_tables=0x1<<result;
@@ -74,12 +69,11 @@ long get_free(int value) {
 //Inicializa todos los valores de la tabla
 int init_table(table_t *table) {
 	char string[STRING_SIZE];
-	get_string("The new table's name (QUIT to exit)",string,STRING_SIZE);
-	if (strcmp("QUIT",string)==0) {
+	if (!get_string("The new table's name (QUIT to exit)",string,STRING_SIZE)||strcmp("QUIT",string)==0){
 		printf("Are you sure you wan to quit (y/n):");
 		char quit;
-		quit= (char) getchar();
-		if (quit=='c')	return 0;
+		quit=get_char();
+		if (quit=='y')	return 0;
 	}
 	table->field_num=0;
 	table->entry_num=0;
@@ -92,39 +86,42 @@ int init_table(table_t *table) {
 }
 //Añade campos a la tabla
 int field_adder(table_t *table,int number) {
-	int return_value=-1;
-	printf("Select the data type: STRING (0), LONG (2) , DOUBLE (4) \nIf you wish to quit type: QUIT (6)\n");
-	int character;
+	int return_value=0+number, breakable=0;
+	char character;
         while (1) {
-		character=getchar();
+		printf("Select the data type: STRING (0), LONG (2) , DOUBLE (4) \nIf you wish to quit type: QUIT (6)\n");
+		character=get_char();
 		switch (character) {
-			case (0):
-				table->fields[number]=STRING;
-	                        get_string("Field's name",table->field_name[number],STRING_SIZE);
+			case (48):
+				table->fields[return_value]=STRING;
+	                        if (!get_string("String field's name",table->field_name[return_value],STRING_SIZE)) break;
 				table->field_size[number]=STRING_SIZE;
-				return_value=1;
+				return_value++;
 				break;
-			case(2):
-				table->fields[number]=LONG;
-        	                get_string("Field's name",table->field_name[number],STRING_SIZE);
+			case(50):
+				table->fields[return_value]=LONG;
+        	                if (!get_string("Long field's name",table->field_name[return_value],STRING_SIZE)) break;
 				table->field_size[number]=LONG_S;
-				return_value=1;
+				return_value++;
 				break;
-			case(4):
-				table->fields[number]=DOUBLE;
-        	                get_string("Field's name",table->field_name[number],STRING_SIZE);
+			case(52):
+				table->fields[return_value]=DOUBLE;
+        	                if (!get_string("Double field's name",table->field_name[return_value],STRING_SIZE)) break;
 				table->field_size[number]=DOUBLE_S;
-				return_value=1;
+				return_value++;
 				break;
-			case(6):
-				table->fields[number]='\0';
-				return_value=0;
+			case(54):
+				table->fields[return_value]='\0';
+				breakable=1;
+				printf("Are you sure you want to quit? (y/n)\n");
+				if (return_value==0) printf("You have written no fields, continuing will erase the table\n");
+				character=getchar();
+				getchar();
+				if (character==121) return return_value;
 				break;
-			default:
-				printf("Select the data type: STRING, LONG, DOUBLE\nIf you wish to quit type: QUIT\n");
                 }
-		if (return_value!=-1) break;
-        }
+		if (breakable) break;
+       }
 	return return_value;
 }
 //Cambia el nombre de un campo
@@ -227,7 +224,7 @@ int link_tables (table_t *origin, table_t *destination) {
 	int breakable=0;
 	while (1) {
 		int relation;
-		printf("Choose which type of relation it is: 1-1 (0) 1-N (2) N-M (3)");
+		printf("Choose which type of relation it is: 1-1 (0) 1-N (1) N-M (2)");
 		relation=getchar();
 		switch (relation) {
 			case(ONE_ONE):printf("a\n");
