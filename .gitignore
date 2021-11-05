@@ -3,7 +3,7 @@
 *.out
 *.swp
 .metadata
-bin/*
+*.class
 .classpath
 .project
 .settings
