@@ -1,7 +1,7 @@
 package a;
 import java.util.*;
 
-public class TablasMultiplicar {
+public class Ejercicio6 {
 	static public void main(String args[]) {
 		Scanner scanner=new Scanner(System.in);
 		calcularMostrarTabla(scanner.nextInt());

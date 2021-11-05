@@ -1,7 +1,7 @@
 package a;
 import java.util.*;
 
-public class Factorial {
+public class Ejercicio7 {
 	static public void main(String args[]) {
 		Scanner scanner=new Scanner(System.in);
 		int a=factorial(scanner.nextInt());

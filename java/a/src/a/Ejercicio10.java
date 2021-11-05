@@ -1,13 +1,13 @@
 package a;
 import java.util.*;
 
-public class Rombo {
+public class Ejercicio10 {
 	public static void main(String args[]) {
 		Scanner scanner=new Scanner(System.in);
-		funcion(scanner.nextInt());
+		rombo(scanner.nextInt());
 		scanner.close();
 	}
-	static void funcion(int number) {
+	static void rombo(int number) {
 		String a="*";
 		int offset=number;
 		for (int i=0;i<number;i++) {
