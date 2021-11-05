@@ -3,8 +3,12 @@
 *.out
 *.swp
 .metadata
-*.class
-*/bin/*
-.classpath
-.project
-.settings
+bin/
+tmp/
+*.tmp
+*.bak
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
