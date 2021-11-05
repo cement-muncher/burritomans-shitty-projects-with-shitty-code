@@ -29,10 +29,8 @@ int get_string(const char *constant,char *input,size_t size) {
 }       
 //Utilizada para leer un solo caracter
 char get_char(void) {
-	int character=getchar();
-	while (1) {
-		if (getchar()=='\n' || getchar()==EOF) break;
-	}
+	int character=getchar(),other_char;
+	while ((other_char=getchar())!='\n'&& other_char!=EOF) continue;
 	return (char) character;
 }
 		
