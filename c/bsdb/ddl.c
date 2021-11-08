@@ -70,7 +70,7 @@ long get_free(int value) {
 int init_table(table_t *table) {
 	char string[STRING_SIZE];
 	if (!get_string("The new table's name (QUIT to exit)",string,STRING_SIZE)||strcmp("QUIT",string)==0){
-		printf("Are you sure you wan to quit (y/n):");
+		printf("Are you sure you want to quit (y/n):");
 		char quit;
 		quit=get_char();
 		if (quit=='y')	return 0;
