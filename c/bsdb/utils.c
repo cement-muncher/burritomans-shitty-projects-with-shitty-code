@@ -24,11 +24,11 @@ int get_string(const char *constant,char *input,size_t size) {
 					||character==' '){
 				string[n_chars]='\0';
 				break;
-			} else if ( n_chars+1==size) {
-				string[n_chars]='\0';
+			} else if ( n_chars+1>=size) {
+				string[size-1]='\0';
+				while ((character=getchar())!='\n' && character!=EOF) continue;
 				break;
 			}
-			fflush(stdin);
 			string[n_chars]=character;
 			n_chars++;
 		}
