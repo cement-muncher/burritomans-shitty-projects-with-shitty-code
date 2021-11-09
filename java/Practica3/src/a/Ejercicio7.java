@@ -9,6 +9,8 @@ public class Ejercicio7 {
 		scanner.close();
 	}
 	static int factorial(int number) {
+		if (number==0) return 1;
+		if (number<0) return -1;
 		for (int i=number-1;i>1;i--) {
 			number*=i;
 		}
