@@ -17,4 +17,6 @@ struct metadata_t db_metadata={
 extern int create_table();
 int main (void) {
 	create_table();
+	printf("Num Tables:%d\nNum relations:%d\n",db_metadata.num_tables,db_metadata.num_relations);
+	printf("Name of the table:%s\nNum of fields:%d\n",db_metadata.tables[0]->name,db_metadata.tables[0]->field_num);
 }
