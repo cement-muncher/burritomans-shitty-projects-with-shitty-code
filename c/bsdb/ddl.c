@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdarg.h>
@@ -19,6 +20,7 @@ int init_table(table_t *table);
 long get_free(int value);
 int field_adder(table_t *table,int number);
 int rename_field(table_t *table);
+int check_table_name(table_t *tables,const char *string);
 //Utilizada para crear tablas
 int create_table(void) {
 	long result;
@@ -42,7 +44,7 @@ int create_table(void) {
 	table->field_num=i;
 	db_metadata.num_tables+=1;
 	db_metadata.free_slots_tables=0x1<<result;
-	table->position=db_metadata.num_tables;
+	table->position=0x1<<result;
 	return 1;
 }
 //Utilizada para obtener los miembros del array vacios
@@ -95,18 +97,21 @@ int field_adder(table_t *table,int number) {
 			case (48):
 				table->fields[return_value]=STRING;
 	                        if (!get_string("String field's name",table->field_name[return_value],STRING_SIZE)) break;
+				if (!check_table_name(table,table->field_name[return_value])) break;
 				table->field_size[number]=STRING_SIZE;
 				return_value++;
 				break;
 			case(50):
 				table->fields[return_value]=LONG;
         	                if (!get_string("Long field's name",table->field_name[return_value],STRING_SIZE)) break;
+				if (!check_table_name(table,table->field_name[return_value])) break;
 				table->field_size[number]=LONG_S;
 				return_value++;
 				break;
 			case(52):
 				table->fields[return_value]=DOUBLE;
         	                if (!get_string("Double field's name",table->field_name[return_value],STRING_SIZE)) break;
+				if (!check_table_name(table,table->field_name[return_value])) break;
 				table->field_size[number]=DOUBLE_S;
 				return_value++;
 				break;
@@ -114,15 +119,23 @@ int field_adder(table_t *table,int number) {
 				table->fields[return_value]='\0';
 				breakable=1;
 				printf("Are you sure you want to quit? (y/n)\n");
-				if (return_value==0) printf("You have written no fields, continuing will erase the table\n");
+				if (0==return_value) printf("You have written no fields, continuing will erase the table\n");
 				character=getchar();
 				getchar();
 				if (character==121) return return_value;
 				break;
                 }
 		if (breakable) break;
-       }
+	}
 	return return_value;
+}
+//Asegura que no existen dos campos con el mismo nombre
+int check_table_name(table_t *table,const char *string) {
+	for (int i=0;i<SIZE;i++) {
+		if (strcmp(table->field_name[i],string)==0) return 0;
+		if (table->fields[i]=='\0') break;
+	}
+	return 1;
 }
 //Cambia el nombre de un campo
 int rename_field(table_t *table) {
