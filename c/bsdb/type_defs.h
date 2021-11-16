@@ -35,11 +35,7 @@ typedef struct table {
 typedef struct relation {
 	char relation_type;
 	char name[STRING_SIZE];
-	void *references[SIZE][SIZE];
-	void *referenced[SIZE][SIZE];
-	char fields[SIZE];
 	void *data[SIZE];
-	char field_name[SIZE][STRING_SIZE];
 	struct table *tables[2];
 } relation_t;
 struct metadata_t {

@@ -31,10 +31,10 @@ int create_table(void) {
 	}
 	db_metadata.tables[result]=malloc(sizeof(table_t));
 	table_t *table=db_metadata.tables[result];
-	if (!init_table(table)) {
+	if (init_table(table)==0) {
 		free(table);
 		return 0;
-	}	
+	};	
 	int i=0;
 	i=field_adder(table,0);
 	if (i==0) {
@@ -71,11 +71,27 @@ long get_free(int value) {
 //Inicializa todos los valores de la tabla
 int init_table(table_t *table) {
 	char string[STRING_SIZE];
-	if (!get_string("The new table's name (QUIT to exit)",string,STRING_SIZE)||strcmp("QUIT",string)==0){
-		printf("Are you sure you want to quit (y/n):");
-		char quit;
-		quit=get_char();
-		if (quit=='y')	return 0;
+	int continuable=0;
+	while (1) {
+		if (!get_string("The new table's name (QUIT to exit)",string,STRING_SIZE)||strcmp("QUIT",string)==0){
+			printf("Are you sure you want to quit (y/n):");
+			char quit;
+			quit=get_char();
+			if (quit=='y')	{
+				return 0;
+			} else if (quit='n') {
+				continuable=1;
+			}
+		}
+		for (int i=0;SIZE>i;i++) {
+			if (db_metadata.tables[i]==NULL) continue;
+			if (strcmp(string,db_metadata.tables[i]->name)==0) {
+				printf("!!!The table name has already been used!!!\n");
+				continuable=1;
+			}
+		}
+	if (continuable) continue;
+	break;
 	}
 	strcpy(table->name,string);
 	table->field_num=0;
@@ -131,9 +147,9 @@ int field_adder(table_t *table,int number) {
 }
 //Asegura que no existen dos campos con el mismo nombre
 int check_table_name(table_t *table,const char *string,int number) {
-	for (int i=number;0<number;i--) {
+	for (int i=0;number>0;i++) {
 		if (strcmp(table->field_name[i],string)==0) {
-			printf("The field identifier has already been used\n");
+			printf("!!!The field identifier has already been used!!!\n");
 			return 0;
 		}
 		if (table->fields[i]=='\0') break;
@@ -147,6 +163,7 @@ int rename_field(table_t *table) {
 	for (int i=0;i<table->field_num;i++) {
 		if (strcmp(table->field_name[i],string)) {
 			get_string("Name to be renamed to ",string,STRING_SIZE);
+			if (!check_table_name) break;
 			strcpy(table->field_name[i],string);
 			return 1;
 		}
