@@ -43,9 +43,9 @@ public class Ejercicio16 {
 		String buffer="";
 		String upperCaseBuffer="";
 		ArrayList<String> result=new ArrayList<String>();
-		int vocales=0;
+		int vocales=0, numVocales=0;
 		for (char i:cadena.toCharArray()) {
-			if ((i=='\n'||i=='\t'||i==' ')&&vocales>=15) {
+			if ((i=='\n'||i=='\t'||i==' ')&&numVocales>=4) {
 				result.add(buffer);
 				buffer="";
 				vocales=0;
@@ -55,40 +55,50 @@ public class Ejercicio16 {
 			switch (upperCaseBuffer) {
 				case "A": if ((vocales&1)!=1) {
 						vocales=vocales|1;
+						numVocales+=1;
 						} else {
 							buffer="";
+							numVocales=0;
 							vocales=0;
 							continue;
 						}
 						break;
 				case "E": if ((vocales&2)!=2) {
 					vocales=vocales|2;
+					numVocales+=1;
 					} else {
 						buffer="";
 						vocales=0;
+						numVocales=0;
 						continue;
 					}
 						break;
 				case "I":if ((vocales&4)!=4) {
 					vocales=vocales|4;
+					numVocales+=1;
 					} else {
 						buffer="";
+						numVocales=0;
 						vocales=0;
 						continue;
 					}
 						break;
 				case "O": if ((vocales&8)!=8) {
 					vocales=vocales|8;
+					numVocales+=1;
 					} else {
 						buffer="";
+						numVocales=0;
 						vocales=0;
 						continue;
 					}
 						break;
 				case "U":if ((vocales&16)!=16) {
 					vocales=vocales|16;
+					numVocales+=1;
 					} else {
 						buffer="";
+						numVocales=0;
 						vocales=0;
 						continue;
 					}
@@ -96,7 +106,8 @@ public class Ejercicio16 {
 			}
 			if (i=='\n'||i=='\t'||i==' ') {
 				buffer="";
-				vocales=0;
+				vocales=0;numVocales=0;
+				numVocales=0;
 				continue;
 			}
 			buffer=buffer+i;
