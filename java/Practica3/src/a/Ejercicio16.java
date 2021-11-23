@@ -56,53 +56,28 @@ public class Ejercicio16 {
 				case "A": if ((vocales&1)!=1) {
 						vocales=vocales|1;
 						numVocales+=1;
-						} else {
-							buffer="";
-							numVocales=0;
-							vocales=0;
-							continue;
 						}
 						break;
 				case "E": if ((vocales&2)!=2) {
 					vocales=vocales|2;
 					numVocales+=1;
-					} else {
-						buffer="";
-						vocales=0;
-						numVocales=0;
-						continue;
 					}
-						break;
+					break;
 				case "I":if ((vocales&4)!=4) {
 					vocales=vocales|4;
 					numVocales+=1;
-					} else {
-						buffer="";
-						numVocales=0;
-						vocales=0;
-						continue;
-					}
-						break;
+					} 
+					break;
 				case "O": if ((vocales&8)!=8) {
 					vocales=vocales|8;
 					numVocales+=1;
-					} else {
-						buffer="";
-						numVocales=0;
-						vocales=0;
-						continue;
 					}
-						break;
+					break;
 				case "U":if ((vocales&16)!=16) {
 					vocales=vocales|16;
 					numVocales+=1;
-					} else {
-						buffer="";
-						numVocales=0;
-						vocales=0;
-						continue;
-					}
-						break;
+					} 
+					break;
 			}
 			if (i=='\n'||i=='\t'||i==' ') {
 				buffer="";
