@@ -39,6 +39,8 @@ public class Ejercicio19 {
 		 * Los bits 0-6  se utilizan para contar el numero de lineas
 		 * Los bits 7-15 se utilizan para contar el numero de palabras
 		 * Los bits 16-31 se utilizan para contar el numero de caracteres
+		 * Cabe la posibilidad de haber overflow pero va a ser dificil
+		 * escribir 128 lineas.
 		 */
 		int lineas=0;
 		int palabras=0;

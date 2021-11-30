@@ -11,7 +11,7 @@ public class Ejercicio15 {
 	static String fibonacci(int num) {
 		assert (num>0):"El numero es negativo";
 		String a="";
-		int value=0,value1=1;
+		int value=1,value1=1;
 		for (int i=0;i<num;i++) {
 			value+=value1;
 			value1=value-value1;
