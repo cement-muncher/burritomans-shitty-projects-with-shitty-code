@@ -12,8 +12,8 @@ public class Ejercicio19 {
 				scanner.close();
 				return;
 			}
-			result1=(((0-x)+Math.sqrt((x*x)-(4*x2*number)))/(2*x2));
-			result2=(((0-x)-Math.sqrt((x*x)-(4*x2*number)))/(2*x2));
+			result1=(((0-x)+(Math.sqrt((x*x)-(4*x2*number))))/(2*x2));
+			result2=(((0-x)-(Math.sqrt((x*x)-(4*x2*number))))/(2*x2));
 			System.out.print("Las soluciones son "+result1+" y "+result2);
 			scanner.close();
 		}
