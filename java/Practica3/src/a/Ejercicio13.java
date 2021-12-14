@@ -7,7 +7,7 @@ public class Ejercicio13 {
 		Ejercicio13 a=new Ejercicio13();
 		a.evaluarDiscriminante();
 	}
-	void evaluarDiscriminante() {
+	private void evaluarDiscriminante() {
 		double x2,x,number,result1,result2;
 		x2=scanner.nextInt();
 		x=scanner.nextInt();
