@@ -2,22 +2,22 @@ package aplicacion;
 import java.util.*;
 public class Session {
 	User user;
-	public boolean logged=false;
+	public static boolean logged=false;
 	public User login() {
 		Scanner scanner=new Scanner(System.in);
 		String userToBeLogged="";
 		String passwordToBeLogged=""; 
 		while (true) {
 			userToBeLogged=scanner.nextLine();
-			if (userToBeLogged.length()>=15) {
+			if (!(userToBeLogged.matches("^[A-Za-z0-9]{0,15}$"))) {
+				System.out.print("Nombre de usuario "+userToBeLogged+" no es valido\n");
 				continue;
 			}
 			break;
 		}
 		while (true) {
 			passwordToBeLogged=scanner.nextLine();
-			if (!(passwordToBeLogged.length()>=15)) {
-				if (checkPassword(passwordToBeLogged)) {
+			if (passwordToBeLogged.matches("^[A-Za-z0-9\\+\\-\\*\\?!\\^/\\$%]{8,15}$")) {				if (checkPassword(passwordToBeLogged,userToBeLogged)) {
 					break;
 				} else {
 					scanner.close();
@@ -30,7 +30,7 @@ public class Session {
 		scanner.close();
 		return user=new User(userToBeLogged);
 	}
-	private static boolean checkPassword (String password) {
+	private static boolean checkPassword (String password,String user) {
 		return true;
 	}
 }
