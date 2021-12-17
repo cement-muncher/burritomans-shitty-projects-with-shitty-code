@@ -5,7 +5,7 @@ final public class Config {
 	public static String filePath="login.txt";
 	public static String usersFile="users.txt";
 	public static String goodbye="Hasta luego!";
-	public static String unloggedMenu="1:Login\n2:Register\n3:Exit";
+	public static String unLoggedMenu="1:Login\n2:Register\n3:Exit\n";
 	public static String loggedMenu="1:Cargar laberinto\n"
 			+ "2:Ver laberinto actual\n"
 			+ "3:Establecer casillas de entrada y salida"
