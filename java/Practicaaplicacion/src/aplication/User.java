@@ -1,4 +1,4 @@
-package aplicacion;
+package aplication;
 
 public class User {
 	static String name="";

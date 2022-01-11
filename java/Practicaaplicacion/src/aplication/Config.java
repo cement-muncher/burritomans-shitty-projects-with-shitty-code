@@ -1,4 +1,4 @@
-package aplicacion;
+package aplication;
 
 final public class Config {
 	public static String version="0.1.0";

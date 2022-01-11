@@ -1,4 +1,4 @@
-package aplicacion;
+package aplication;
 import java.util.*;
 
 public class Main {
@@ -8,7 +8,7 @@ public class Main {
 	public static void main (String args[]) {
 		while (true) {
 			if (session.getterLogged()==true) {
-				
+				System.out.print("hello world\n");
 				
 			} else {
 				Main.unlogged();

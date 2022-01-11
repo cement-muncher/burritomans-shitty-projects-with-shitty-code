@@ -1,21 +1,22 @@
-package aplicacion;
+package aplication;
 public class Session {
 	User user;
 	private static boolean logged=false;
 	public void login() {
 		String userToBeLogged="";
-		String passwordToBeLogged=""; 
+		String passwordToBeLogged="";
 		while (true) {
 			System.out.print("a");
-			userToBeLogged=Main.scanner.nextLine();
+			userToBeLogged=Interface.input();
 			if (!(userToBeLogged.matches("^[A-Za-z0-9]{1,15}$"))) {
 				System.out.print("Nombre de usuario "+userToBeLogged+" no es valido\n");
 				continue;
 			}
 			break;
 		}
+		System.out.print("b");
 		while (true) {
-			passwordToBeLogged=Main.scanner.nextLine();
+			passwordToBeLogged=Interface.input();
 			if (passwordToBeLogged.matches("^[A-Za-z0-9\\+\\-\\*\\?!\\^/\\$%]{8,15}$")) {				if (checkPassword(passwordToBeLogged,userToBeLogged)) {
 					break;
 				} else {
