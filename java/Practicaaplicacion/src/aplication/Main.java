@@ -9,7 +9,7 @@ public class Main {
 		while (true) {
 			if (session.getterLogged()==true) {
 				System.out.print("hello world\n");
-				
+				break;
 			} else {
 				Main.unlogged();
 			}
