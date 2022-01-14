@@ -18,14 +18,13 @@ public class Main {
 	private static void unlogged() {
 		System.out.print(Config.unLoggedMenu);
 		input=scanner.next();
-		System.out.print(input+"\n");
 		switch (input) {
 			case "1":
 					session.login();
 				break;
 			case "2":System.out.print("a");
 				break;
-			case "3":System.out.print("b");
+			case "3":System.out.print("b"); 
 		}
 	}
 }
