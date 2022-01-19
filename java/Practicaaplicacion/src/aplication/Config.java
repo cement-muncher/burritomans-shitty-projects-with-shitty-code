@@ -1,3 +1,4 @@
+//Información miscelánea
 package aplication;
 
 final public class Config {
@@ -8,10 +9,10 @@ final public class Config {
 	public static String unLoggedMenu="1:Login\n2:Register\n3:Exit\n";
 	public static String loggedMenu="1:Cargar laberinto\n"
 			+ "2:Ver laberinto actual\n"
-			+ "3:Establecer casillas de entrada y salida"
-			+ "4:Buscar caminos"
-			+ "5:Ver usuario actual"
-			+ "6:Cerra sesión"
-			+ "0:Salir";
+			+ "3:Establecer casillas de entrada y salida\n"
+			+ "4:Buscar caminos\n"
+			+ "5:Ver usuario actual\n"
+			+ "6:Cerra sesión\n"
+			+ "7:Salir\n";
 	
 }	
