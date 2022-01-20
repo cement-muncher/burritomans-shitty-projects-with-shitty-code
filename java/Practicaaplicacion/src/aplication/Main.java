@@ -28,7 +28,7 @@ public class Main {
 				//Llama al metodo login para pasar al estado logged
 					session.login();
 				break;
-			case "2":System.out.print("a");
+			case "2":session.createUser();
 				break;
 			case "3":System.exit(0);
 				break;
@@ -53,11 +53,11 @@ public class Main {
 			case "6":{
 				//Llama al metodo que pone logged a false, deslogeando al user
 				session.setterLogged(false);
-				System.out.print(Config.goodbye);
+				System.out.print(Config.goodbye+"\n");
 			}
 				break;
 			case "7":{
-				System.out.print(Config.goodbye);
+				System.out.print(Config.goodbye+"\n");
 				System.exit(0);
 			}
 		}
