@@ -2,7 +2,8 @@
 package aplication;
 
 final public class Config {
-	public static String version="0.1.0";
+	public static String version="0.2.0";
+	public static String labyrinthsPath="labyrinths/assets";
 	public static String filePath="login.txt";
 	public static String usersFile="users.txt";
 	public static String goodbye="Hasta luego!";

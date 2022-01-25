@@ -36,14 +36,17 @@ public class Main {
 	}
 	//Lo mismo pero cuando se está logeado
 	private static void logged() {
+		Labyrinth labyrinth=new Labyrinth();
 		System.out.print(Config.loggedMenu);
 		input=scanner.next();
 		switch (input) {
 			case "1":
-					session.login();
-				break;
-			case "2":System.out.print("Proximamente\n");
-				break;
+					scanner.nextLine();
+					labyrinth.loadLabyrinth(scanner.nextLine());
+					break;
+			case "2":
+					labyrinth.printLabyrinth();
+					break;
 			case "3":System.out.print("Proximamente\n");	
 				break;
 			case "4":System.out.print("Proximamente\n");
