@@ -1,7 +1,7 @@
 package practica4;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.ArrayList;
+//import java.util.Scanner;
 
 public class Ejercicio9 {
 	static public void main(String args[]) {
