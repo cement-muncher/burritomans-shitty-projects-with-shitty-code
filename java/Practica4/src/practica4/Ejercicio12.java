@@ -7,7 +7,7 @@ package practica4;
  */
 import java.util.Scanner;
 
-public class Ejercicio12_TBD {
+public class Ejercicio12 {
 	public static void main(String args[]) {
 		Scanner a=new Scanner(System.in);
 		int b=a.nextInt();
@@ -17,9 +17,9 @@ public class Ejercicio12_TBD {
 		System.out.print(c+"\n");
 		c=secuenciaNaturalC(b);
 		System.out.print(c+"\n");
-	//	c=secuenciaNaturalD(b);
-//		System.out.print(c+"\n");
-	a.close();
+		c=secuenciaNaturalD(b);
+		System.out.print(c+"\n");
+		a.close();
 	}
 	public static String secuenciaNaturalA(int a) {
 		String string="";
@@ -73,31 +73,25 @@ public class Ejercicio12_TBD {
 		}
 			return string;
 	}
-	/*public static String secuenciaNaturalD(int a) {
+	public static String secuenciaNaturalD(int a) {
 		int[][] array=new int[a][a];
 		String string="";
 		Integer b;
 		int c=0;
-		int c2=0;
 		for (int i=0;i<a;i++) {
-			array[i][0]=++c;
-		}
-		for (int i=a-1;i>0;i--) {
-	//	int i=a-1;
-			c2++;
-			for (int j=c2;j<1+i;j++) {
-				array[c2][j]=++c;
+			for (int j=i;j<a-i;j++) {
+				array[j][i]=++c;
 			}
-			for (int j=a-c2;j>=0;j--) {
-				array[j][a-c2]=c++;
+			for (int j=i+1;j<a-i;j++) {
+				array[a-i-1][j]=++c;
 			}
-			for (int j=i;j>=c2;j--) {
-				array[c2-1][j]=c++;
+			for (int j=a-i-2;j>i;j--) {
+				array[j][a-i-1]=++c;
 			}
-			for (int j=0;j<a-2*c2;j++) {
-				array[j][c2]=c++;
+			for (int j=a-i-1;j>i;j--) {
+				array[i][j]=++c;
 			}
-			if (c2==a*a) break;
+			if (c==a*a) break;
 	}
 		for (int i=0;i<a;i++) {
 			
@@ -109,7 +103,7 @@ public class Ejercicio12_TBD {
 		}
 		return string;
 	}
-	*/
+
 	public static String paddingString(String string2) {
 		String string="";
 		for (int k=0;k<10-string2.toString().length();k++) {
