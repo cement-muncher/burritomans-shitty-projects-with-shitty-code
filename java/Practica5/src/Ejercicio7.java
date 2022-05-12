@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Ejercicio7 {
 	public static void main(String args[]) {
 		Scanner a=new Scanner(System.in);
@@ -11,22 +11,27 @@ public class Ejercicio7 {
 	private static String reemplazarPalabras(String texto,String terminos) {
 		String d="";
 		String[] texto1=texto.split(" ");
-		String[] array=new String[20];
-		int counter=0;
-		do {
-			array[counter++]=terminos.substring(0,terminos.indexOf(","));
-			terminos=terminos.substring(terminos.indexOf(",")+1);
-		} while (terminos.indexOf(",")>=0);
-		counter=0;
+		boolean  e=false;
+		ArrayList<String> array=new ArrayList<String>();
+		for (String c:terminos.split(",") ) {
+			array.add(c);
+		}
 		for (String a: texto1) {
 			for (String b: array) {
-				if (a==b) {
-					for (int i=0;i<a.length();i++) {
-						d+="*";
-					}
+				if (a.matches(b)) {
+					e=true;
 				}
-				
 			}
+			if (e) {
+				for (int i=0;i<a.length();i++) {
+					d+="*";
+				}
+			} else {
+				for (char f: a.toCharArray())
+				d+=f;
+			}
+			d+=" ";
+			e=false;
 		}
 		return d;
 	}
