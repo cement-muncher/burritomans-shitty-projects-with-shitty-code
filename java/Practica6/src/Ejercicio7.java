@@ -1,9 +1,5 @@
-/* Un programador inteligente sabe 
- * que si no esta roto mejor no tocarlo
- * (Al menos durante produccion)
- */
 
-public class Ejercicio6 {
+public class Ejercicio7 {
 		private Object[] arrayElementos;
 		private int numElementos;
 		private static final int TAMAÑO_INICIAL = 4;
@@ -12,7 +8,7 @@ public class Ejercicio6 {
 		/** 
 		 * Inicializa el array de elementos de la lista.  
 		 */
-		public Ejercicio6 (){
+		public Ejercicio7 (){
 		arrayElementos = new Object[TAMAÑO_INICIAL];
 		numElementos = 0;
 		}
@@ -21,7 +17,7 @@ public class Ejercicio6 {
 		 * @return número de elementos actual en la lista.
 		 */
 		
-		public void push(Object elemento) {
+		public void offer(Object elemento) {
 			if (numElementos == 0) {
 				arrayElementos[0] = elemento;
 				numElementos++;
@@ -32,7 +28,9 @@ public class Ejercicio6 {
 				numElementos++;
 			}
 		}
-
+		public int size() {
+			return numElementos;
+		}
 		private void comprobarLlenado() {
 			// El array interno está casi lleno, se duplica el espacio. 
 			if (numElementos + 1 == arrayElementos.length) {
@@ -47,14 +45,37 @@ public class Ejercicio6 {
 				return arrayElementos[numElementos];
 		}
 		
-		public Object pop() {
-			Object returnable=arrayElementos[numElementos-1];
+		public Object poll() {
+			Object returnable=arrayElementos[0];
 			if (numElementos==1) {
-				arrayElementos[0]=null;
 				return returnable;
 			}
-			arrayElementos[--numElementos]=null;
+			for (int i=0;i<numElementos;i++) {
+				arrayElementos[i]=arrayElementos[i+1];
+			}
 			return returnable;
 		}
-
+		public void clear() {
+			if (numElementos==1) {
+				return;
+			}
+			for (int i=0;i<numElementos;i++) {
+				arrayElementos[i]=null;
+			}
+		}
+		
+		boolean contains(Object a) {
+			for (int i=0;i<numElementos;i++) {
+				if (arrayElementos[i].equals(a)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		public boolean isEmpty() {
+			if (numElementos==0) {
+				return true;
+			}
+			return false;
+		}
 }
