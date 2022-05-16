@@ -9,14 +9,18 @@ import java.util.*;
 public class Main {
 	
 	public static void main(String args[]) {
-		Date date=new Date();
-		Log.initLog();
-		Scanner a=new Scanner(System.in);
 		try {
-			a.nextInt();
-		} catch (Throwable E) {
-			Log.debugLog("Uh Oh",E);
+			Log.initLog();
+		
+		} catch (LoggerException E) {
+			
 		}
-		Log.closeLog();
+		IOoperations.readFile("a", 0, 0);
+		try {
+			Log.closeLog();
+		} catch (LoggerException E) {
+			
+			
+		}
 	}
 }
