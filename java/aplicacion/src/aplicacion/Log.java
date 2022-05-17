@@ -46,26 +46,27 @@ public class Log {
 		Date logMoment=new Date();
 		try { 
 			aplicationLog.append(logMoment.toString()+": " + debugMessage+"\n" 	);
+			debugLog.append(logMoment.toString()+": " + debugMessage+"\n");
 		} catch (IOException E) {
 			System.err.print(E.getMessage());
 		}
 	}
 	
-	public static void closeLog() throws LoggerException{
+	public static void closeLog() {
 		Date logMoment=new Date();
 		try {
 			debugLog.append(logMoment.toString()+" Aplication shut down"+
 			"\n---------------------------------------\n");
 			debugLog.close();
 		} catch (IOException E) {
-			throw new LoggerException("Error cerrando el debug log",E);
+			System.err.print(E.getMessage());
 		}
 		try {
 			aplicationLog.append(logMoment.toString()+" Aplication shut down"+
 					"\n---------------------------------------\n");
 					aplicationLog.close();
 		} catch (IOException E) {
-			throw new LoggerException("Error cerrando el aplication log",E);
+			System.err.print(E.getMessage());
 		} 
 		
 	}
