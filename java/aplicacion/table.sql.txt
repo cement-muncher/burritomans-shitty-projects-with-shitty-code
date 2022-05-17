@@ -1,0 +1,2 @@
+ create table users( id int auto_increment unique, username varchar(100) not null unique, password varchar(500) not null, name varchar(300) not null unique, nif varchar(20) not null unique, email varchar(300) not null unique, address varchar(500), birthdate date, role varchar(50) default 'user' );
+insert into users (username,password,name,nif,email,address,birthdate,role) values('admin','admin','admin','admin','admin','admin',24-5-1998,'admin');

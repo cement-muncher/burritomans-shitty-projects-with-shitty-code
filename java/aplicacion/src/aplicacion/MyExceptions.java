@@ -23,15 +23,15 @@ class LoggerException extends Exception implements Serializable {
 }
 
 	//Para errores de DB.java	
-class DBConnection extends Exception implements Serializable {
+class DBConnectionException extends Exception implements Serializable {
 		private static final long serialVersionUID = 1L;
-		DBConnection (String message) {
+		DBConnectionException (String message) {
 			super(message);
 		}
-		DBConnection (String message, Throwable cause) {
+		DBConnectionException (String message, Throwable cause) {
 			super(message,cause);
 		}
-		DBConnection (Throwable cause) {
+		DBConnectionException (Throwable cause) {
 			super(cause);
 		}
 	

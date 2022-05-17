@@ -16,6 +16,7 @@ public class Main {
 		} catch (LoggerException E) {
 			System.err.print(E.getMessage());
 		}
+		Login b=new Login();
 		Log.closeLog();
 
 			
