@@ -1,9 +1,8 @@
 package tests;
 
 public class Main {
-	public static void main(String Args[]) throws Throwable {
-		char[] buffer= {'A','B'};
-
-		
+	public static void main(String args[]) {
+		Labyrinth a=new Labyrinth();
+		a.load_maze();
 	}
 }

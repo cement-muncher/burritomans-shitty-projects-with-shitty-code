@@ -25,7 +25,7 @@ public class SQLWrapper {
 			 selectSql+=string+",";
 		}
 		selectSql=" FROM USERS;";
-		
+		System.out.print(selectSql);
 		try {
 			Statement statement=connection.createStatement();
         	resultset = statement.executeQuery(selectSql);
