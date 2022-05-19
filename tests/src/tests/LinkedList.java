@@ -2,26 +2,23 @@ package tests;
 
 public class LinkedList<E> {
 	private Nodo nodo;
-	private static int counter=0;
+	public int n=0;
 	LinkedList() {
 		this.nodo=new Nodo(null);
 	}
 	public void add(E a,int b) {
-		if (nodo.objeto==null) {
-			nodo.objeto=a;
-			nodo.siguiente=null;
-			counter++;
+		if (nodo.siguiente==null) {
+			Nodo c=new Nodo(a);
+			nodo.siguiente=c;
+			c.anterior=nodo;
+			nodo=nodo.siguiente;
+			n++;
 			return;
 		}
 		Nodo c=new Nodo(a);
 		c.anterior=this.getNodo(b);
 		c.siguiente=this.getNodo(b).siguiente;
-		
-		
-		counter++;
-	}
-	public int getLength() {
-		return counter;
+		n++;
 	}
 	public void remove(int a) {
 		if (nodo.anterior==null) {
@@ -33,22 +30,27 @@ public class LinkedList<E> {
 		return;
 	}
 	public E getObjeto(int a) {
-		int b=a-counter+1;
-		System.out.print(b);
-		Nodo buffer=this.nodo.anterior;
+		int b=a-n+1;
+		Nodo buffer=nodo;
 		for (int i=b;i<0;i++) {
-			System.out.print(i);
+			
 			buffer=buffer.anterior;
 		}
 		return buffer.objeto;
 	}
 	private Nodo getNodo(int a) {
-		int b=a-counter+1;
-		Nodo buffer=this.nodo;
+		int b=a-n+1;
+		Nodo buffer=nodo;
 		for (int i=b;i<0;i++) {
 			buffer=buffer.anterior;
 		}
 		return buffer;
+	}
+	public void eraseAll() {
+		nodo=getNodo(0);
+		nodo.siguiente=null;
+		nodo.objeto=null;
+		
 	}
 	private class Nodo {
 		E objeto;

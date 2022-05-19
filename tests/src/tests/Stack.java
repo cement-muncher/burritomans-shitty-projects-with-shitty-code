@@ -11,14 +11,14 @@ public class Stack <E>{
 		this.stack=new LinkedList<E>();
 	}
 	public void push(E objeto) {
-		stack.add(objeto,stack.getLength());
+		stack.add(objeto,stack.n);
 	}
 	public E peek( ) {
-		return stack.getObjeto(stack.getLength());
+		return stack.getObjeto(stack.n);
 	}
 	public E pop() {
-		E a=stack.getObjeto(stack.getLength());
-		stack.remove(stack.getLength());
+		E a=stack.getObjeto(stack.n);
+		stack.remove(stack.n);
 		return a;
 	}
 }
