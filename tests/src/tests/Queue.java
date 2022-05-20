@@ -9,13 +9,13 @@ public class Queue <E>{
 	Queue() {
 		this.queue=new LinkedList<E>();
 	}
-	public void push(E objeto) {
-		queue.add(objeto,0);
+	public void add(E objeto) {
+		queue.add(objeto,queue.n);
 	}
-	public E peek( ) {
+	public E check( ) {
 		return queue.getObjeto(0);
 	}
-	public E pop() {
+	public E serve() {
 		E a=queue.getObjeto(0);
 		queue.remove(0);
 		return a;

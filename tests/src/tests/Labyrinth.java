@@ -1,15 +1,22 @@
 package tests;
-import java.math.*;
+
 
 public class Labyrinth {
-	static final char[][] maze= {
+	static  char[][] maze= {
 			{'#','#','#','#','#'},
 			{'#',' ',' ','#','#'},
-			{'#','#',' ',' ',' '},
-			{' ',' ',' ','#','#'},
+			{'#',' ','#',' ',' '},
+			{'#',' ','#',' ','#'},
+			{'#',' ','#',' ','#'},
+			{'#',' ','#',' ','#'},
+			{'#',' ',' ',' ','#'},
+			{' ',' ','#',' ','#'},
+			{'#','#','#',' ','#'},
+			{'#',' ',' ',' ','#'},
+			{'#',' ','#',' ','#'},
+			{'#',' ',' ',' ','#'},
 			{'#','#','#','#','#'}
 	};
-	
 	public void load_maze() {
 		LinkedList<Cell> cells=new LinkedList<Cell>();
 		for (int i=0;i<maze.length;i++) {
@@ -21,7 +28,7 @@ public class Labyrinth {
 					}
 			}
 		}
-		Coordenadas entrada=new Coordenadas(3,0);
+		Coordenadas entrada=new Coordenadas(7,0);
 		int posicionCasillaEntrada=0;
 		for  (int i=0;i<cells.n;i++) {
 			if (cells.getObjeto(i).recorrible) {
@@ -32,10 +39,17 @@ public class Labyrinth {
 				}
 			}
 		}
-		start.cell=cells.getObjeto(posicionCasillaEntrada);
-		start.origen=null;
+		CellNode start=new CellNode(cells.getObjeto(posicionCasillaEntrada),null);
 		Coordenadas salida=new Coordenadas(2,4);
-		recorrerLaberinto(cells,salida,cells.getObjeto(posicionCasillaEntrada),null,start);
+		recorrerLaberinto(cells,salida,cells.getObjeto(posicionCasillaEntrada),start);
+		System.out.print("\n");
+		caminoMasCorto(cells,salida,start);
+		for (int i=0;i<maze.length;i++) {
+			for (int j=0;j<maze[i].length;j++) {
+				System.out.print(maze[i][j]+" ");
+			}
+			System.out.print('\n');
+		}
 	}
 	
 	private class Coordenadas{
@@ -66,7 +80,7 @@ public class Labyrinth {
 			try {
 				if (a.getObjeto(pos-1).recorrible&&(a.getObjeto(pos-1).posicion.y==this.posicion.y)) {
 					this.cellLeft=a.getObjeto(pos-1);
-		//			System.out.print(this.posicion.x+" "+this.posicion.y+" l\n");
+			//System.out.print(this.posicion.x+" "+this.posicion.y+" l\n");
 				}
 
 			} catch (Exception E) {
@@ -75,7 +89,7 @@ public class Labyrinth {
 			try {	
 				if (a.getObjeto(pos+1).recorrible&&(a.getObjeto(pos+1).posicion.y==this.posicion.y)) {
 					this.cellRight=a.getObjeto(pos+1);
-	//				System.out.print(this.posicion.x+" "+this.posicion.y+" r\n");
+		//		System.out.print(this.posicion.x+" "+this.posicion.y+" r\n");
 				}
 			} catch (Exception E) {
 				
@@ -100,51 +114,69 @@ public class Labyrinth {
 		
 	}
 	private class CellNode {
-		Cell origen;
+		CellNode origen;
 		CellNode[] destino=new CellNode[3];
 		Cell cell;
-		CellNode(Cell a,Cell b) {
+		CellNode(Cell a,CellNode b) {
 			this.cell=a;
 			this.origen=b;
+			this.destino[0]=null;
+			this.destino[1]=null;
+			this.destino[2]=null;
 		}
 	}
-	private Queue<CellNode> queue=new Queue<CellNode>();
-	private Stack<CellNode> stack=new Stack<CellNode>();
-	private CellNode start;
-	private void breadthFirstSearch(LinkedList<Cell> a, Coordenadas salida,CellNode origen) {
-		CellNode b=;
-		queue.ad
+	private void caminoMasCorto(LinkedList<Cell> a, Coordenadas salida,CellNode origen) {
+		Queue<CellNode> fifo=new Queue<CellNode>(origen);
+		CellNode node;
+		while (true) {
+			node=fifo.check();
+			if (node.cell.posicion.x==salida.x&&node.cell.posicion.y==salida.y) break;
+			for (int i=0;i<3;i++) {
+				if (node.destino[i]!=null) {
+					fifo.add(node.destino[i]);
+			
+				}
+			}
+			//System.out.print(node.cell.posicion.x+" "+node.cell.posicion.y+"\n");
+			fifo.serve();
+		}
 		
-		
+		while (node.origen!=null) {
+			maze[node.cell.posicion.y][node.cell.posicion.x]='$';
+			node=node.origen;
+		}
+		maze[node.cell.posicion.y][node.cell.posicion.x]='$';
 	}
-	private void recorrerLaberinto(LinkedList<Cell> a,Coordenadas salida,Cell posicionActual,Cell previousCell,CellNode b) {
+	private void recorrerLaberinto(LinkedList<Cell> a,Coordenadas salida,Cell posicionActual,CellNode currentCell) {
 		int i=0;
 		posicionActual.recorrible=false;
-		b.origen=previousCell;
-		//	System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
+		System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
 		try {
 			if (posicionActual.cellDown.recorrible) {
-				System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
-				b.destino[i++]=new CellNode(posicionActual.cellDown,posicionActual);
-				recorrerLaberinto(a,salida,posicionActual.cellDown,posicionActual,b);
+		//		System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
+				currentCell.destino[i]=new CellNode(posicionActual.cellDown,currentCell);
+				recorrerLaberinto(a,salida,posicionActual.cellDown,currentCell.destino[i]);
+				i++;
 			}
 		} catch (Exception E) {
 	//	System.out.print("a");
 		}
 		try {
 			if (posicionActual.cellUp.recorrible) {
-				System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
-				b.destino[i++]=new CellNode(posicionActual.cellUp,posicionActual);
-				recorrerLaberinto(a,salida,posicionActual.cellUp,posicionActual,b);
+	//			System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
+				currentCell.destino[i]=new CellNode(posicionActual.cellUp,currentCell);
+				recorrerLaberinto(a,salida,posicionActual.cellUp,currentCell.destino[i]);
+				i++;
 			}
 		} catch (Exception E) {
 	//	System.out.print("b");
 		}
 		try {
 			if (posicionActual.cellLeft.recorrible) {
-				System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
-				b.destino[i++]=new CellNode(posicionActual.cellLeft,posicionActual);
-				recorrerLaberinto(a,salida,posicionActual.cellLeft,posicionActual,b);
+	//			System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
+				currentCell.destino[i]=new CellNode(posicionActual.cellLeft,currentCell);
+				recorrerLaberinto(a,salida,posicionActual.cellLeft,currentCell.destino[i]);
+				i++;
 			}
 		} catch (Exception E) {
 		//	System.out.print("c");
@@ -152,9 +184,10 @@ public class Labyrinth {
 		try {
 			
 			if (posicionActual.cellRight.recorrible) {
-				System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
-				b.destino[i++]=new CellNode(posicionActual.cellRight,posicionActual);
-				recorrerLaberinto(a,salida,posicionActual.cellRight,posicionActual,b);
+	//			System.out.print(posicionActual.posicion.x+" "+posicionActual.posicion.y+"\n");
+				currentCell.destino[i]=new CellNode(posicionActual.cellRight,currentCell);
+				recorrerLaberinto(a,salida,posicionActual.cellRight,currentCell.destino[i]);
+				i++;
 			}
 		} catch (Exception E) {
 //	System.out.print("d");

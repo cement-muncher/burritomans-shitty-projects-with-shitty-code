@@ -7,10 +7,11 @@ public class LinkedList<E> {
 		this.nodo=new Nodo(null);
 	}
 	public void add(E a,int b) {
-		if (nodo.siguiente==null) {
+		if (b==n) {
 			Nodo c=new Nodo(a);
 			nodo.siguiente=c;
 			c.anterior=nodo;
+			
 			nodo=nodo.siguiente;
 			n++;
 			return;
@@ -21,27 +22,32 @@ public class LinkedList<E> {
 		n++;
 	}
 	public void remove(int a) {
-		if (nodo.anterior==null) {
+		if (n==a) {
+			nodo.anterior.siguiente=null;
+			nodo.anterior=nodo;
+			return;
+		} else if (a==0) {
+			if (n==1) {
+				this.eraseAll();
+			} else {
+				this.getNodo(a).siguiente.anterior=null;
+				n--;
+			}
 			return;
 		}
 		Nodo b=this.getNodo(a);
-		b.anterior.siguiente=b.siguiente;
 		b.siguiente.anterior=b.anterior;
-		return;
+		b.anterior.siguiente=b.siguiente;
+		n--;
 	}
 	public E getObjeto(int a) {
-		int b=a-n+1;
-		Nodo buffer=nodo;
-		for (int i=b;i<0;i++) {
-			
-			buffer=buffer.anterior;
-		}
-		return buffer.objeto;
+		return getNodo(a).objeto;
 	}
 	private Nodo getNodo(int a) {
-		int b=a-n+1;
 		Nodo buffer=nodo;
-		for (int i=b;i<0;i++) {
+		int b=n-a-1
+				;
+		for (int i=0;i<b;i++ ) {
 			buffer=buffer.anterior;
 		}
 		return buffer;
@@ -50,7 +56,7 @@ public class LinkedList<E> {
 		nodo=getNodo(0);
 		nodo.siguiente=null;
 		nodo.objeto=null;
-		
+		n=1;
 	}
 	private class Nodo {
 		E objeto;
